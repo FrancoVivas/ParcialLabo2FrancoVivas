@@ -21,7 +21,7 @@ int menu()
 
 	printf("\n__________________________________________________________________________");
 	printf("\n                                                                          |");
-	printf("\n                       BIENVENIDO A CINEMARK                              |\n");
+	printf("\n                       BIENVENIDO A CINEPOLIS                              |\n");
 	printf("__________________________________________________________________________|\n");
 	printf("_____________________________________________________________");
 	printf("\n|1)CARGAR ARCHIVO                                            |\n|"
@@ -61,25 +61,25 @@ void pFunction(char* messageError1,char* messageError2,char* messageSucess,int* 
 int main(void) {
 	setbuf(stdout,NULL);
 
-	srand(time(NULL));//semilla
+	srand(time(NULL));
 
 	char opcion = 'n';
 	int fileState = 0;
 	int generated = 0;
 	char path[8000];
 
-	LinkedList* listaPrincipal = ll_newLinkedList(); //creo nueva lista
+	LinkedList* listaPrincipal = ll_newLinkedList();
 
 	if(listaPrincipal!=NULL)
 	{
-		if(ll_isEmpty(listaPrincipal)){//se verifica que la lista este vacia...
+		if(ll_isEmpty(listaPrincipal)){
 	   	    printf("\n[LISTA INICIALIZADA]");
 	    }
 		do
 		{
 			switch(menu())
 			{
-				case 1://CARGAR ARCHIVO
+				case 1:
 					limpioPantalla();
 					if(fileState==1)
 					{
@@ -100,7 +100,7 @@ int main(void) {
 					}
 					system("Pause");
 				break;
-				case 2://LISTAR LISTA CON VALORES CON 0s
+				case 2:
 					limpioPantalla();
 					pFunction("\nPRIMERO DEBES DE CARGAR EL ARCHIVO!",
 							"\nOCURRIO UN ERROR AL INTENTAR MOSTRAR LA LISTA, REINTENTA! ",
@@ -108,7 +108,7 @@ int main(void) {
 							&fileState, STATE_FILE_CLOSED, listaPrincipal, controller_ListMovies);
 					system("Pause");
 				break;
-				case 3://MAPPEAR VALORES ASIGNAR RATING
+				case 3:
 					if(fileState == 1)
 				 	 {
 				 	 	listaPrincipal = ll_map(listaPrincipal, controller_CalcularRating);
@@ -129,7 +129,7 @@ int main(void) {
 				 	 }
 					system("Pause");
 				break;
-				case 4://MAPPEAR VALORES ASIGNAR GENERO
+				case 4:
 						if(fileState == 1 && generated == 1)
 					 	 {
 					 	 	listaPrincipal = ll_map(listaPrincipal, controller_CalcularGenero);
@@ -154,7 +154,7 @@ int main(void) {
 					 	 }
 						system("Pause");
 				break;
-				case 5://FILTRAR POR GENERO DE MOVIE
+				case 5:
 					limpioPantalla();
 					if(generated==2 || generated == 3)
 					{
@@ -169,7 +169,7 @@ int main(void) {
 					}
 					system("Pause");
 				break;
-				case 6://SORT, ascendente de menor a mayor, descendente de mayor a menor...
+				case 6:
 					if(generated == 2)
 					{
 						if(listaPrincipal!=NULL)
@@ -189,7 +189,7 @@ int main(void) {
 					}
 					system("Pause");
 				break;
-				case 7://Guardar peliculas: Se deberá guardar el listado del punto anterior en un archivo de texto.
+				case 7:
 					limpioPantalla();
 					if(fileState==1 && generated==3)
 					{
@@ -213,7 +213,7 @@ int main(void) {
 					}
 					system("Pause");
 				break;
-				case 8://SALIR DE LA APP
+				case 8:
 					limpioPantalla();
 					if(fileState!=0)
 					{
@@ -225,7 +225,7 @@ int main(void) {
 						if(opcion=='s')
 						{
 							printf("DECIDIO CERRAR LA APLICACION.....\n");
-							ll_deleteLinkedList(listaPrincipal);//borro la lista
+							ll_deleteLinkedList(listaPrincipal);
 						}
 						else
 						{

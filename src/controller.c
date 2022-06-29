@@ -2,15 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-
 #include "utn.h"
 #include "LinkedList.h"
 #include "parser.h"
 #include "informes.h"
 #include "movie.h"
 
-
-//LOAD FILE
 int controller_loadFromText(char* path , LinkedList* pArrayMovies)
 {
 	int todoOk=0;
@@ -49,15 +46,13 @@ int controller_saveAsCSV(FILE *path , LinkedList *pArrayMovies)
 		sizeOfList = ll_len(pArrayMovies);
 		for(i=0;i<sizeOfList;i++)
 		{
-			//CARGAMOS INFORMACION MEDIANTE GETTERS
 			pAuto=(eMovie*)ll_get(pArrayMovies,i);
-            if(pAuto!=NULL)//PUEDE DEVOLVER NULL
+            if(pAuto!=NULL)
             {
                Movie_getId(pAuto, &id);
                Movie_getTitle(pAuto, title);
                Movie_getGenero(pAuto, genre);
                Movie_getRating(pAuto, &rating);
-              //LO GUARDO CON UN ENCABEZADO PARA QUE NO ME PISE EL PRIMER ELEMENTO AL REABRIRLO
               if(flagFantasma)
               {
         		fprintf(path, "%s,%s,%s,%s\n", "ID", "TITLE", "GENRE", "RATING");
@@ -73,18 +68,17 @@ int controller_saveAsCSV(FILE *path , LinkedList *pArrayMovies)
 int controller_saveAsText(char *path, LinkedList *this)
 {
 	int todoOk = 0;
-	FILE *fpArchivo = fopen(path, "w"); // abro el archivo
+	FILE *fpArchivo = fopen(path, "w");
 
 	if (fpArchivo != NULL && controller_saveAsCSV(fpArchivo, this))
-	{ //si el archivo no es null y pude escribir, retorno 1
+	{
 		todoOk = 1;
 	}
-	fclose(fpArchivo); // cierro el archivo.
-	ll_clear(this); //vacio el array
+	fclose(fpArchivo);
+	ll_clear(this);
 	return todoOk;
 }
 
-//MOVIE RELATED
 int controller_ListMovies(LinkedList* pArrayMovies)
 {
 	int todoOk = 0;
@@ -99,9 +93,7 @@ int controller_ListMovies(LinkedList* pArrayMovies)
 	else
 	{
 		if(ll_isEmpty(pArrayMovies))
-		{//se verifica que la lista no este vacia o en caso de abrir un archivo filtrado y buscar algun tipo
-		//avise que no encontro ese tipo...
-		//	printf("\nNO MOVIES REGISTERED TO SHOW THE LIST!\n");
+		{
 			todoOk =2;
 	    }
 		else
@@ -117,7 +109,7 @@ int controller_ListMovies(LinkedList* pArrayMovies)
 			for(int i=0;i<sizeOf;i++)
 			{
 				pAuxMovie = (eMovie*) ll_get(pArrayMovies, i);
-				if(pAuxMovie!=NULL)//PUEDE DEVOLVER NULL
+				if(pAuxMovie!=NULL)
 				{
 					Movie_ShowOnlyOne(pAuxMovie);
 				}
@@ -180,9 +172,6 @@ void* controller_CalcularGenero(void* pMovie)
 	return auxMovie;
 }
 
-
-//FILTRADO
-
 int controller_filterByGenre(LinkedList* pArrayMovies)
 {
 	int todoOk = 0;
@@ -193,7 +182,7 @@ int controller_filterByGenre(LinkedList* pArrayMovies)
 	{
 		switch(showOptionMenuFilter())
 		{
-			case 1://DRAMA
+			case 1:
 				filteredList = ll_filter(pArrayMovies,filterByDramaGenre);
 				if(filteredList!=NULL)
 				{
@@ -212,7 +201,7 @@ int controller_filterByGenre(LinkedList* pArrayMovies)
 					ll_deleteLinkedList(filteredList);
 				}
 				break;
-				case 2://COMEDIA
+				case 2:
 					filteredList = ll_filter(pArrayMovies, filterByComediaGenre);
 					if(filteredList!=NULL)
 					{
@@ -231,7 +220,7 @@ int controller_filterByGenre(LinkedList* pArrayMovies)
 						ll_deleteLinkedList(filteredList);
 					}
 				break;
-				case 3://ACCION
+				case 3:
 					filteredList = ll_filter(pArrayMovies, filterByAccionGenre);
 					if(filteredList!=NULL)
 					{
@@ -250,7 +239,7 @@ int controller_filterByGenre(LinkedList* pArrayMovies)
 						ll_deleteLinkedList(filteredList);
 					}
 				break;
-				default://TERROR
+				default:
 					filteredList = ll_filter(pArrayMovies, filterByTerrorGenre);
 					if(filteredList!=NULL)
 					{

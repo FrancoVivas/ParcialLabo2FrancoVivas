@@ -44,7 +44,7 @@ int filterByComediaGenre(void* pElement)
 
 	if(!strcmp(((eMovie*) pElement)->genero,"Comedia"))//solo entra cuando devuelve 0, son iguales
 	{
-		todoOk = 1;//devuelve 1 si se agrega a la lista
+		todoOk = 1;
 	}
 	return todoOk;
 }
@@ -53,9 +53,9 @@ int filterByAccionGenre(void* pElement)
 {
 	int todoOk = 0;
 
-	if(!strcmp(((eMovie*) pElement)->genero,"Accion"))//solo entra cuando devuelve 0, son iguales
+	if(!strcmp(((eMovie*) pElement)->genero,"Accion"))
 	{
-		todoOk = 1;//devuelve 1 si se agrega a la lista
+		todoOk = 1;
 	}
 	return todoOk;
 }
@@ -64,9 +64,9 @@ int filterByTerrorGenre(void* pElement)
 {
 	int todoOk = 0;
 
-	if(!strcmp(((eMovie*) pElement)->genero,"Terror"))//solo entra cuando devuelve 0, son iguales
+	if(!strcmp(((eMovie*) pElement)->genero,"Terror"))
 	{
-		todoOk = 1;//devuelve 1 si se agrega a la lista
+		todoOk = 1;
 	}
 	return todoOk;
 }
