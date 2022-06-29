@@ -3,23 +3,21 @@
 #include <string.h>
 #include <ctype.h>
 #include <time.h>
-
 #include "utn.h"
 #include "LinkedList.h"
 #include "controller.h"
 #include "movie.h"
 
-//CONSTRUCTORES
 eMovie* Movie_new()
 {
 	eMovie* auxMovie;
 
 	auxMovie = (eMovie*) malloc(sizeof(eMovie));
 
-	if(auxMovie!=NULL)//INICIALIZO LOS CAMPOS DE LA STRUCT
+	if(auxMovie!=NULL)
 	{
 		auxMovie->id = 0;
-		strcpy(auxMovie->title,"INVALID TITLE");  //[NO LAST NAME]
+		strcpy(auxMovie->title,"INVALID TITLE");
 		auxMovie->rating = 0.0;
 		strcpy(auxMovie->genero,"NN");
 	}
@@ -30,7 +28,7 @@ eMovie* Movie_newParametros(char* idStr,char* titleStr,char* generoStr,char* rat
 {
 	eMovie *this;
 
-	this = Movie_new();//GUARDO LO QUE DEVUELVE LA FUNCION
+	this = Movie_new();
 
 	int auxId;
 	float auxRating;
@@ -38,12 +36,12 @@ eMovie* Movie_newParametros(char* idStr,char* titleStr,char* generoStr,char* rat
 	auxId = atoi(idStr);
 	auxRating = atof(ratingStr);
 
-	if(this!=NULL && idStr!=NULL && titleStr!=NULL && generoStr!=NULL && ratingStr!=NULL)//VALIDO TODO
+	if(this!=NULL && idStr!=NULL && titleStr!=NULL && generoStr!=NULL && ratingStr!=NULL)
 	{
 		if(!(Movie_setId(this, auxId) &&
 			Movie_setTitle(this, titleStr) &&
 			Movie_setRating(this, auxRating) &&
-			Movie_setGenero(this, generoStr)))//[VALIDACION DE CADA CAMPO]
+			Movie_setGenero(this, generoStr)))
 		{
 			Movie_delete(this);
 			this=NULL;
@@ -52,7 +50,6 @@ eMovie* Movie_newParametros(char* idStr,char* titleStr,char* generoStr,char* rat
 	return this;
 }
 
-//DESTRUCTOR
 void Movie_delete(eMovie* this)
 {
 	if(this!=NULL)
@@ -61,7 +58,6 @@ void Movie_delete(eMovie* this)
 	}
 }
 
-//SETTERS
 int Movie_setTitle(eMovie* this,char* title)
 {
 	int todoOk = -1;
@@ -172,7 +168,6 @@ int Movie_getGenero(eMovie* this,char* genero)
 	return todoOk;
 }
 
-//OTROS
 int Movie_ShowOnlyOne(eMovie *eMovie)
 {
 	int todoOk=0;
@@ -199,7 +194,6 @@ int Movie_ShowOnlyOne(eMovie *eMovie)
 	return todoOk;
 }
 
-//SORT
 int Movie_sortByGenero(void* genero1,void* genero2)
 {
 	int todoOk = 0;

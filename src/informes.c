@@ -31,9 +31,9 @@ int filterByDramaGenre(void* pElement)
 {
 	int todoOk = 0;
 
-	if(!strcmp(((eMovie*) pElement)->genero,"Drama"))//solo entra cuando devuelve 0, son iguales
+	if(!strcmp(((eMovie*) pElement)->genero,"Drama"))
 	{
-		todoOk = 1;//devuelve 1 si se agrega a la lista
+		todoOk = 1;
 	}
 	return todoOk;
 }
@@ -42,7 +42,7 @@ int filterByComediaGenre(void* pElement)
 {
 	int todoOk = 0;
 
-	if(!strcmp(((eMovie*) pElement)->genero,"Comedia"))//solo entra cuando devuelve 0, son iguales
+	if(!strcmp(((eMovie*) pElement)->genero,"Comedia"))
 	{
 		todoOk = 1;
 	}
